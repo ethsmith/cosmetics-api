@@ -1,0 +1,22 @@
+# Misc
+.nyc
+.env
+.DS_Store
+
+# npm
+node_modules
+build
+npm-debug.log
+package-lock.json
+*.log
+*.gz
+
+# Coveralls
+.nyc_output
+coverage
+
+# Benchmarking
+benchmarks/graphs
+
+# ignore additional files using core.excludesFile
+# https://git-scm.com/docs/gitignore
