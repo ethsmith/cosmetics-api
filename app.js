@@ -1,6 +1,6 @@
 const express = require('express');
 
-const dbController = require('./DBController')
+const dbController = require('./db')
 
 require('dotenv').config();
 
@@ -27,7 +27,7 @@ const allowOnlyIPs = (req, res, next) => {
 app.use(allowOnlyIPs)
 
 // Connect to MySQL
-dbController.getDb.connect((err) => {
+dbController.getConnection.connect((err) => {
     if (err) {
         throw err;
     }
@@ -38,9 +38,9 @@ dbController.getDb.connect((err) => {
 });
 
 // Define a route to fetch data from MySQL
-app.get('/pets', (req, res) => {
-    const query = 'SELECT * FROM pets';
-    dbController.getDb.query(query, (err, results) => {
+app.get('/cosmetics', (req, res) => {
+    const query = 'SELECT * FROM cosmetics';
+    dbController.getConnection.query(query, (err, results) => {
         if (err) {
             throw err;
         }
