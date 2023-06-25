@@ -6,4 +6,4 @@ class CosmeticDto {
     }
 }
 
-module.exports = CosmeticDto;
+module.exports = { CosmeticDto };

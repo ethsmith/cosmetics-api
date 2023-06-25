@@ -2,6 +2,8 @@ const express = require('express');
 
 const dbController = require('./db')
 
+const cosmeticRouter = require('./cosmetic.controller')
+
 require('dotenv').config();
 
 const app = express();
@@ -24,7 +26,8 @@ const allowOnlyIPs = (req, res, next) => {
     }
 };
 
-app.use(allowOnlyIPs)
+app.use(allowOnlyIPs);
+app.use('/api/cosmetics', cosmeticRouter.router);
 
 // Connect to MySQL
 dbController.getConnection.connect((err) => {
@@ -38,15 +41,15 @@ dbController.getConnection.connect((err) => {
 });
 
 // Define a route to fetch data from MySQL
-app.get('/cosmetics', (req, res) => {
-    const query = 'SELECT * FROM cosmetics';
-    dbController.getConnection.query(query, (err, results) => {
-        if (err) {
-            throw err;
-        }
-        res.json(results);
-    });
-});
+// app.get('/cosmetics', (req, res) => {
+//     const query = 'SELECT * FROM cosmetics';
+//     dbController.getConnection.query(query, (err, results) => {
+//         if (err) {
+//             throw err;
+//         }
+//         res.json(results);
+//     });
+// });
 
 // Start the server
 const port = process.env.PORT || 3000;

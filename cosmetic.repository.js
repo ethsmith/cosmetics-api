@@ -19,3 +19,22 @@ async function createCosmetic(cosmetic) {
     return result.rows[0];
 }
 
+async function updateCosmetic(cosmetic) {
+    const query = 'UPDATE cosmetics SET name = $1, type = $2 WHERE id = $3 RETURNING *';
+    const values = [cosmetic.name, cosmetic.type, cosmetic.id];
+    const result = await db.getConnection.query(query, values);
+    return result.rows[0];
+}
+
+async function deleteCosmetic(id) {
+    const query = `DELETE FROM cosmetics WHERE id = ${id}`;
+    await db.getConnection.query(query);
+}
+
+module.exports = {
+    getAllCosmetics,
+    getCosmeticById,
+    createCosmetic,
+    updateCosmetic,
+    deleteCosmetic
+}
